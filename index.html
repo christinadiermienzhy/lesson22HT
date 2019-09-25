@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		lesson22
+	</title>
+</head>
+<body>
+	<canvas id='canvas' width="600" height="2000">
+	<script type="text/javascript">
+//1. вам нужно написать функцию, которая принимает массив с точками и чертит линию, которая их соединяет.
+		var points = [
+  				[50, 50],
+  				[50, 100],
+  				[100, 100],
+  				[100, 50],
+  				[50, 50]
+		];
+
+		function drawFigure(arr){
+			let canvas = document.getElementById('canvas');
+			let ctx =canvas.getContext('2d');
+			ctx.fillStyle='red';
+			ctx.beginPath();
+			arr.forEach(function(item, index){
+				let [x,y]=[item[0],item[1]];
+				if (index===0){
+					ctx.moveTo(x,y);
+				} else {
+					ctx.lineTo(x,y);
+				}
+			})
+			ctx.stroke();
+		}
+/*	 //need for test
+	drawFigure(points);
+	*/
+
+
+//2. напишите функцию, которая рисует снеговика и принимает его началные координаты и размеры. используйте функцию для рисования круга, которая будет принимать параметр - булевое значение, для отрисовки закрашенного или пустого круга
+		function drawCircle(param, x, y, radius){
+			let canvas = document.getElementById('canvas');
+			let ctx =canvas.getContext('2d');
+			ctx.beginPath();
+			ctx.arc(x,y,radius, 0, 2*Math.PI, false);
+			if (param){
+				ctx.fill();
+			} else{
+				ctx.stroke();
+			}	
+		}
+
+	//	drawSircle(false,100,100,100)
+
+let snowman = [
+	{fillStatus:false,
+		x: 150,
+		y:50,
+		radius:50
+	},
+	{fillStatus:false,
+		x: 150,
+		y:175,
+		radius:75
+	},
+	{fillStatus:false,
+		x: 150,
+		y:370,
+		radius:120
+	},
+	{fillStatus:true,
+		x: 150,
+		y:150,
+		radius:10
+	},
+	{fillStatus:true,
+		x: 150,
+		y:200,
+		radius:10
+	},
+	{fillStatus:true,
+		x: 150,
+		y:300,
+		radius:10
+	},
+	{fillStatus:true,
+		x: 150,
+		y:350,
+		radius:10
+	},
+	{fillStatus:true,
+		x: 160,
+		y:40,
+		radius:10
+	},
+	{fillStatus:true,
+		x: 140,
+		y:40,
+		radius:10
+	},
+	{fillStatus:true,
+		x: 150,
+		y:70,
+		radius:7
+	}
+];
+
+		function drawSnowman(arr){
+			arr.forEach(function(item){
+				drawCircle(item.fillStatus, item.x,item.y, item.radius)
+			})
+		}
+	/*	 //need for test
+	drawSnowman(snowman);
+	*/
+ 		
+	</script>
+</body>
+</html>
